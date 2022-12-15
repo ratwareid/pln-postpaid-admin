@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:replace="widget/input :: input-hidden(fieldname='message_type',value=${#servletContext.getAttribute('message_type')})"></div>
+<div th:replace="widget/input :: input-hidden(fieldname='message_message',value=${#servletContext.getAttribute('message_message')})"></div>
+
+<script th:inline="javascript">
+    // console.log('masuk');
+    var type = $("#message_type").val();
+    var message = $("#message_message").val();
+    if (message != null) {
+        // console.log('alert');
+
+        if (type === "normal"){
+            swal(message);
+        }
+        if (type === "info"){
+            swal('Info', message, 'info');
+        }
+        if (type === "warning"){
+            swal('Warning', message, 'warning');
+        }
+        if (type === "success"){
+            swal('Success', message, 'success');
+        }
+        if (type === "error"){
+            swal('Error', message, 'error');
+        }
+        $("#message_type").val(null);
+        $("#message_message").val(null);
+        [[${#servletContext.setAttribute('message_type',null)}]];
+        [[${#servletContext.setAttribute('message_type',null)}]];
+    }
+</script>
+</html>

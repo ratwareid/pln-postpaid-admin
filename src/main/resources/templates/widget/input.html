@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="input-hidden(fieldname,value)">
+    <input th:id="${fieldname}" th:name="${fieldname}" type="hidden" th:readonly="true" class="form-control" th:value="${value}">
+</div>
+
+<div th:fragment="input-text(fieldname,value,caption)"
+     th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <input th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}" type="text" class="form-control"
+               th:data-action="|${onchange}|"
+               th:required="${required}"
+               onchange="ajaxServer(this.getAttribute('data-action'));">
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-password(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <input th:id="${fieldname}" th:name="${fieldname}"
+                   th:required="${required}" th:readonly="${readonly}"
+                   type="password" class="form-control pwstrength" data-indicator="pwindicator" th:value="${value}">
+        </div>
+        <div id="pwindicator" class="pwindicator">
+            <div class="bar"></div>
+            <div class="label"></div>
+        </div>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-switch(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),desc=(${desc} == null ? '':${desc})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <label class="form-control custom-switch mt-1">
+            <input type="checkbox" th:id="${fieldname}" th:name="${fieldname}" th:checked="${value}" name="custom-switch-checkbox" class="custom-switch-input"
+                   th:disabled="${readonly}">
+            <span class="custom-switch-indicator"></span>
+            <span class="custom-switch-description" th:text="${desc}"></span>
+        </label>
+    </div>
+</div>
+
+<div th:fragment="input-phone(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-phone"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control "
+                   th:classappend="'phone-number-'+${fieldname}"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+        </div>
+        <script th:inline="javascript">
+            var classname = '.phone-number-'+[[${fieldname}]];
+            new Cleave(classname, {
+                phone: true,
+                phoneRegionCode: 'id',
+                prefix: '08',
+                blocks: [2, 4, 4, 3],
+                delimiter: '-',
+                delimiterLazyShow: true
+            });
+        </script>
+    </div>
+</div>
+
+<div th:fragment="input-date(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                </div>
+            </div>
+            <input type="date" class="form-control"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${#dates.format(value, 'yyyy-MM-dd')}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+        </div>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-datetime(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control datetimepicker"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+        </div>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-daterange(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control daterange-cus"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+        </div>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-time(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-clock"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control timepicker"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+        </div>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+
+<div th:fragment="input-number(fieldname,value,caption)" th:with="readonly=(${readonly} == null ? false: ${readonly}),onchange=(${onchange}),
+            required=(${required} == null ? false : ${required}),prefix=(${prefix}),suffix=(${suffix})">
+    <div class="form-group">
+        <label th:text="${caption}"></label>
+        <div class="input-group">
+            <div class="input-group-prepend" th:if="${prefix != null}">
+                <div class="input-group-text" th:text="${prefix}"></div>
+            </div>
+            <input type="number" class="form-control " hidden="true"
+                   th:readonly="${readonly}" th:id="${fieldname}" th:name="${fieldname}" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+            <input type="text" class="form-control "
+                   th:classappend="'currency-'+${fieldname}"
+                   th:readonly="${readonly}" th:id="${fieldname}+'-show'" th:name="${fieldname}+'-show'" th:value="${value}"
+                   th:data-action="|${onchange}|"
+                   onchange="ajaxServer(this.getAttribute('data-action'));">
+            <div class="input-group-append" th:if="${suffix != null}">
+                <div class="input-group-text" th:text="${suffix}"></div>
+            </div>
+        </div>
+        <script th:inline="javascript">
+            var classname = '.currency-'+[[${fieldname}]];
+            new Cleave(classname, {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
+            $("#"+[[${fieldname}]]+"-show").change(function (){
+               //console.log('trigger change number');
+               var value = this.value.replaceAll(',','');
+                $("#"+[[${fieldname}]]).val(parseFloat(value));
+            });
+        </script>
+        <div class="invalid-feedback">Kolom ini wajib di isi!</div>
+    </div>
+</div>
+</html>

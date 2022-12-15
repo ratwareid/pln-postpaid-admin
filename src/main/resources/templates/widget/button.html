@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <a th:fragment="button-icon-primary(caption,url)" th:href="${url}" class="btn btn-group btn-icon icon-left btn-primary">
+        <i class="far fa-edit"></i>
+        <b th:text="${caption}"></b>
+    </a>
+    <a th:fragment="button-icon-danger(caption,url)" th:href="${url}" class="btn btn-group btn-icon icon-left btn-danger">
+        <i class="fas fa-times"></i>
+        <b th:text="${caption}"></b>
+    </a>
+
+    <a th:fragment="button-primary(caption,url)" th:href="${url}" class="btn btn-primary" th:text="${caption}"></a>
+    <a th:fragment="button-danger(caption,url)" th:href="${url}" class="btn btn-danger" th:text="${caption}"></a>
+    <button th:fragment="button-submit(caption,url)" type="submit" class="btn btn-success" th:formaction="${url}" th:text="${caption}"></button>
+
+    <a th:fragment="button-link-modals-delete-icon(caption,url)" class="btn btn-icon icon-left btn-danger" data-confirm="Delete Data|Are you sure want to delete this data?" th:data-confirm-yes='|window.location.href="${url}"|'>
+        <i style="color: white" class="fas fa-times"></i>
+        <b style="color: white" th:text="${caption}"></b>
+    </a>
+
+    <a th:fragment="button-link-modals-delete(caption,url)" class="btn btn-danger" data-confirm="Delete Data|Are you sure want to delete this data?"
+       th:data-confirm-yes='|window.location.href="${url}"|'
+       th:text="${caption}" style="color: white">
+    </a>
+
+    <a th:fragment="button-link-modals-save-icon(caption,url)" class="btn btn-icon icon-left btn-success" data-confirm="Save Data|Are you sure want to save this data?" th:data-confirm-yes='|window.location.href="${url}"|'>
+        <i style="color: white" class="fas fa-times"></i>
+        <b style="color: white" th:text="${caption}"></b>
+    </a>
+
+    <a th:fragment="button-link-modals-save(caption,url)" class="btn btn-success" data-confirm="Save Data|Are you sure want to save this data?"
+       th:data-confirm-yes='|window.location.href="${url}"|'
+       th:text="${caption}" style="color: white">
+    </a>
+
+    <button th:fragment="button-submit-modals-save(formid,caption,url)"
+            class="btn btn-success"
+            data-confirm="Save Data|Are you sure want to save this data?"
+            th:data-confirm-yes="|var form = document.getElementById('${formid}');form.action='${url}';form.submit();|"
+            th:text="${caption}" style="color: white"></button>
+
+</html>

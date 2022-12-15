@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" lang="en"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/static/css/styles.css}">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Master Tarif</title>
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div sec:authorize="hasAnyAuthority('ADMIN','EDITOR','CREATOR')" th:include="widget/navbar"></div>
+	<div sec:authorize="hasAuthority('USER')" th:include="widget/navbar2"></div>
+	<div class="content">
+		<div class="row justify-content-center">
+			<div class="col-10">
+				<div class="contentbody">
+
+					<div th:if="${mode} == 'list'">
+						<h4>Data Tarif</h4>
+
+						<div th:insert="widget/searchbar :: searchbar(sortby=${sortby})"></div>
+
+						<div class="row">
+							<div class="col-12 col-md-12 col-lg-12">
+								<div class="card">
+									<div class="card-header ">
+										<div class="card-header-form">
+											<div th:insert="widget/button :: button-icon-primary(caption='Tambah Tarif Baru',url=@{/master/tarif/add})"></div>
+										</div>
+									</div>
+
+									<div class="card-body p-0">
+										<div class="table-responsive">
+											<table class="table table-stripped">
+												<thead class=" text-primary">
+												<tr>
+													<th>ID</th>
+													<th>Daya</th>
+													<th>Tarif Per Kwh</th>
+													<th style="text-align-last: center;">Aksi</th>
+												</tr>
+												</thead>
+												<tbody>
+												<tr th:if="${list.getSize()==0}">
+													<td colspan="5"> Tidak ada daftar tarif tersedia. </td>
+												</tr>
+												<tr th:each="tarif, iStat : ${list.content}">
+													<td><span th:text="${tarif.id}"></span></td>
+													<td><span th:text="${tarif.daya}"></span></td>
+													<td><span th:text="${tarif.tarifperkwh}"></span></td>
+													<td class="td-actions text-left" style="display: flex;text-align-last: center;place-content:center;">
+														<div th:insert="widget/button :: button-icon-primary(caption='Ubah',url=@{/master/tarif/edit(id=${tarif.id})})"></div>
+														<div th:insert="widget/button :: button-icon-danger(caption='Hapus',url=@{/master/tarif/delete(id=${tarif.id})})"></div>
+													</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+									<div class="row">
+										<nav th:if="${list.totalPages > 0}" class="pagination">
+											<ul class="pagination pagination-sm" th:each="pageNumber : ${pageNumbers}">
+												<li class="page-item" aria-current="page" th:classappend="${pageNumber==list.number + 1} ? active">
+													<a class="page-link" th:text="${pageNumber}" th:href="@{/master/tarif/(size=${list.size}, page=${pageNumber})}"></a>
+												</li>
+											</ul>
+										</nav>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div th:if="${mode} == 'edit'">
+						<div th:fragment="edit">
+
+							<div class="section-body">
+								<div class="col-12 col-md-12 col-lg-12">
+									<div class="card">
+										<div class="card-header">
+											<h4 th:if="${tarif.id == null}">Tambah Tarif</h4>
+											<h4 th:if="${tarif.id != null}">Ubah Tarif</h4>
+										</div>
+										<form id="form" method="post" class="needs-validation" novalidate th:action="@{/master/tarif/save}" th:object="${tarif}">
+											<div class="card-body">
+												<div class="row">
+													<div class="col-12 col-md-6 col-lg-6">
+														<div th:replace="widget/input :: input-text(fieldname='id',value=${tarif.id},caption='ID',readonly=true)"></div>
+														<div class="form-group">
+															<label>Daya</label>
+															<select class="form-control" th:field="${tarif.daya}">
+																<option th:each="daya : ${supporteddaya}" th:value="${daya}" th:text="${daya}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="col-12 col-md-6 col-lg-6">
+														<div th:replace="widget/input :: input-text(fieldname='tarifperkwh',value=${tarif.tarifperkwh},caption='Tarif Per Kwh',required=true)"></div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-md-6 col-lg-6">
+														<div class="button-group">
+															<div th:replace="widget/button :: button-primary(caption='Kembali',url=@{/master/tarif/})"></div>
+															<div th:replace="widget/button :: button-submit(caption=${'Simpan'},url=@{/master/tarif/save})"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:insert="widget/alert.html"></div>
+
+</body>
+</html>

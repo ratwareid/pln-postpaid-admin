@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:fragment="searchbar(sortby)" th:with="sortby=(${sortby})">
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Kata Kunci" aria-label="Kata Kunci" aria-describedby="button-addon2" name="keyword" th:value="${keyword}">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" >Cari</button>
+        </div>
+    </div>
+    <div th:insert="widget/sorting :: sorting(sortby=${sortby})"></div>
+</form>
+</html>

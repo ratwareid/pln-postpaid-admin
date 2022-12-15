@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="sorting(sortby)" th:with="sortby=(${sortby})">
+    <div class="col-sm-4 ml-auto" style="text-align: left;">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label> Diurutkan Oleh:</label>
+                    <select class="form-control" id="sort_by" name="sort_by">
+                        <option th:each="sort : ${sortby}" th:value="${sort.key}" th:text="${sort.name}" th:selected="${sort.key == sort_by}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label> Secara:</label>
+                    <select class="form-control" id="sort_method" name="sort_method">
+                        <option value="ASC" th:selected="${sort_method == 'ASC'}">Terkecil</option>
+                        <option value="DESC" th:selected="${sort_method == 'DESC'}">Terbesar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<nav class="navbar navbar-dark navbar-expand-lg bg-gradient justify-content-center" style="background-color: goldenrod;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Aplikasi Pembayaran Listrik Postpaid</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav mx-auto">
+                <!--<li class="nav-item">
+                    <a class="nav-link" th:classappend="${#httpServletRequest.servletPath != null && #httpServletRequest.servletPath == '/'} ? active" aria-current="page" th:href="@{/}">Dashboard</a>
+                </li>-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:classappend="${#httpServletRequest.servletPath != null && #httpServletRequest.servletPath.contains('/master')} ? active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Master Data
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/master/users/}">User</a></li>
+                        <li><a class="dropdown-item" th:href="@{/master/level/}">Level</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/master/pelanggan/}">Pelanggan</a></li>
+                        <li><a class="dropdown-item" th:href="@{/master/tarif/}">Tarif</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:classappend="${#httpServletRequest.servletPath != null && #httpServletRequest.servletPath.contains('/transaksi')} ? active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Transaksi
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/transaksi/penggunaan/}">Data Penggunaan</a></li>
+                        <li><a class="dropdown-item" th:href="@{/transaksi/tagihan/}">Data Tagihan</a></li>
+                        <li><a class="dropdown-item" th:href="@{/transaksi/pembayaran/}">Data Pembayaran</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:classappend="${#httpServletRequest.servletPath != null && #httpServletRequest.servletPath.contains('/laporan')} ? active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Laporan
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/laporan/tagihan-summary/}">Laporan Tagihan Summary</a></li>
+                        <li><a class="dropdown-item" th:href="@{/laporan/tagihan-detail/}">Laporan Tagihan Detail</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ms-auto mb-2 mb-lg-0" sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Selamat Datang , <b><span sec:authentication="name">Username</span></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Ganti Password</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a type="button" class="dropdown-item" th:href="@{/logout}">Keluar</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</html>
