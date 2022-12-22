@@ -3,6 +3,7 @@ Springboot Web using JPA Postgresql and thmeleaf
 
 Admin panel pembayaran PLN Postpaid.
 
+==========================================================================
 Dibuat menggunakan :
 - Springboot
 - Hibernate jpa
@@ -10,7 +11,7 @@ Dibuat menggunakan :
 - Thymeleaf
 - Lombok
 - Swagger OpenAPI
-
+==========================================================================
 Feature :
 
 Master Data :
@@ -27,4 +28,27 @@ Transaksi :
 Laporan :
 - Laporan tagihan dan pembayaran
 
+==========================================================================
+
+Panduan instalasi :
+
+Software yang diperlukan :
+- Postgres server versi 9.6 atau lebih baru
+- PGAdmin 4
+- Java SDK versi 11
+- IDE Intellij ultimate atau sejenis
+
+1. Persiapan Database :
+- Download backup database di : <a href="https://github.com/ratwareid/pln-postpaid-admin/tree/master/database"> Klik Disini</a>
+- Buka PGAdmin 4 lalu buat database baru (contoh : spring_test2)
+
+2. Build dan Jalankan program :
+- Buka IDE Intellij laluopen project pln-postpaid-admin yang sudah kalian download.
+- Download maven library
+- Buka <a href="https://github.com/ratwareid/pln-postpaid-admin/blob/master/src/main/resources/application.properties">application.properties</a> lalu ubah datasource url, datasource name dan password disesuaikan dengan koneksi database kalian.
+- Running spring application melalui IDE atau build dan running jar melalui terminal.
+
+3. Buka url http://localhost:8081/login kemudian masukkan username : admin dan password: admin
+
+==========================================================================
 
