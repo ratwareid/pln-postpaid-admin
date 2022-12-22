@@ -1,5 +1,5 @@
 # pln-postpaid-admin
-Springboot Web using JPA Postgresql and thmeleaf
+Springboot Web Admin with Thymeleaf
 
 Admin panel pembayaran PLN Postpaid.
 
