@@ -44,6 +44,7 @@ Software yang diperlukan :
 1. Persiapan Database :
 - Download backup database di : <a href="https://github.com/ratwareid/pln-postpaid-admin/tree/master/database"> Klik Disini</a>
 - Buka PGAdmin 4 lalu buat database baru (contoh : spring_test2)
+- Restore database menggunakan file .backup yang telah didownload diatas
 
 2. Build dan Jalankan program :
 - Buka IDE Intellij laluopen project pln-postpaid-admin yang sudah kalian download.
