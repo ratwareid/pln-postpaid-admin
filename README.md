@@ -55,3 +55,12 @@ Software yang diperlukan :
 3. Buka url http://localhost:8081/login kemudian masukkan username : admin dan password: admin
 
 <br>==========================================================================<br>
+
+Preview Apps :
+
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/loginpage.png" alt="Login Page" width="500" height="600">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/masterdata.png" alt="Master Data" width="500" height="600">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/transaksi.png" alt="Transaksi" width="500" height="600">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/laporan.png" alt="Laporan" width="500" height="600">
+
+
