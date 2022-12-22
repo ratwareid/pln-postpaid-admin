@@ -3,7 +3,7 @@ Springboot Web using JPA Postgresql and thmeleaf
 
 Admin panel pembayaran PLN Postpaid.
 
-==========================================================================
+<br>==========================================================================<br>
 Dibuat menggunakan :
 - Springboot
 - Hibernate jpa
@@ -11,7 +11,7 @@ Dibuat menggunakan :
 - Thymeleaf
 - Lombok
 - Swagger OpenAPI
-==========================================================================
+<br>==========================================================================<br>
 Feature :
 
 Master Data :
@@ -28,8 +28,7 @@ Transaksi :
 Laporan :
 - Laporan tagihan dan pembayaran
 
-==========================================================================
-
+<br>==========================================================================<br>
 Panduan instalasi :
 
 Software yang diperlukan :
@@ -50,5 +49,4 @@ Software yang diperlukan :
 
 3. Buka url http://localhost:8081/login kemudian masukkan username : admin dan password: admin
 
-==========================================================================
-
+<br>==========================================================================<br>
