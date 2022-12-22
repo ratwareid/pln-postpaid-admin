@@ -58,9 +58,9 @@ Software yang diperlukan :
 
 Preview Apps :
 
-<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/loginpage.png" alt="Login Page" width="500" height="600">
-<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/masterdata.png" alt="Master Data" width="500" height="600">
-<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/transaksi.png" alt="Transaksi" width="500" height="600">
-<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/laporan.png" alt="Laporan" width="500" height="600">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/loginpage.png" alt="Login Page" width="800" height="500">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/masterdata.png" alt="Master Data" width="800" height="500">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/transaksi.png" alt="Transaksi" width="800" height="500">
+<img src="https://github.com/ratwareid/pln-postpaid-admin/blob/master/preview/laporan.png" alt="Laporan" width="800" height="500">
 
 
